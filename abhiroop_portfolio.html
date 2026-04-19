@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhiroop Shanker Tewari — Engineering Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f0ece3;
+    --cream: #e8e2d5;
+    --steel: #2a3444;
+    --orange: #e85d26;
+    --orange-light: #f4784a;
+    --grey: #8a8a8a;
+    --light-grey: #c8c4bc;
+    --card-bg: #141414;
+    --border: rgba(240,236,227,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--orange);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(232,93,38,0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s ease, width 0.2s, height 0.2s;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    color: var(--off-white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+    padding: 0.55rem 1.4rem;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .nav-cta:hover { background: var(--orange); color: var(--black); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 4rem;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding-right: 3rem;
+    z-index: 2;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--orange);
+  }
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--off-white);
+    margin-bottom: 1rem;
+  }
+  .hero-name .accent { color: var(--orange); }
+  .hero-subtitle {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    color: var(--light-grey);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--grey);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 3rem;
+  }
+  .hero-cta-group { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    background: var(--orange);
+    color: var(--black);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); }
+  .btn-ghost {
+    color: var(--off-white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--off-white); }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-visual {
+    width: 340px; height: 460px;
+    position: relative;
+  }
+  .hero-card {
+    width: 100%; height: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card-inner {
+    width: 100%; height: 100%;
+    background:
+      linear-gradient(135deg, rgba(232,93,38,0.12) 0%, transparent 50%),
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(240,236,227,0.04) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(240,236,227,0.04) 40px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+  }
+  .avatar-ring {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: spin-ring 20s linear infinite;
+  }
+  @keyframes spin-ring {
+    to { transform: rotate(360deg); }
+  }
+  .avatar-ring::after {
+    content: '';
+    position: absolute;
+    width: 8px; height: 8px;
+    background: var(--orange);
+    border-radius: 50%;
+    top: -4px; left: 50%; transform: translateX(-50%);
+  }
+  .avatar-initials {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--steel), var(--black));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.05em;
+    color: var(--off-white);
+    animation: counter-spin 20s linear infinite;
+  }
+  @keyframes counter-spin {
+    to { transform: rotate(-360deg); }
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.75rem; width: 100%;
+  }
+  .stat-box {
+    background: rgba(240,236,227,0.04);
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--orange);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-top: 0.2rem;
+  }
+
+  /* BG GRID */
+  #home::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(240,236,227,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,236,227,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  /* Diagonal accent */
+  .hero-diagonal {
+    position: absolute;
+    top: 0; right: 0;
+    width: 50%; height: 100%;
+    background: linear-gradient(135deg, transparent 60%, rgba(232,93,38,0.04) 100%);
+    pointer-events: none;
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-ind {
+    position: absolute;
+    bottom: 2rem; left: 4rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: var(--grey);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--orange);
+    animation: scroll-anim 2s ease-in-out infinite;
+  }
+  @keyframes scroll-anim {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* SECTION WRAPPER */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--orange);
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+  }
+  .section-divider {
+    width: 60px; height: 3px;
+    background: var(--orange);
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  #about { background: #0e0e0e; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-left { }
+  .about-objective {
+    background: var(--card-bg);
+    border-left: 3px solid var(--orange);
+    padding: 2rem 2rem;
+    margin-bottom: 2rem;
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--light-grey);
+  }
+  .about-meta {
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .meta-row {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .meta-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    min-width: 90px;
+    padding-top: 2px;
+  }
+  .meta-val {
+    font-size: 0.9rem;
+    color: var(--off-white);
+    line-height: 1.5;
+  }
+  .meta-val a { color: var(--orange); text-decoration: none; }
+
+  .about-right { }
+  .about-body {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--grey);
+    margin-bottom: 2rem;
+  }
+  .about-body strong { color: var(--off-white); font-weight: 500; }
+
+  .highlight-boxes {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .highlight-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    transition: border-color 0.25s;
+  }
+  .highlight-box:hover { border-color: var(--orange); }
+  .highlight-box .hb-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .highlight-box .hb-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.4rem;
+  }
+  .highlight-box .hb-desc {
+    font-size: 0.82rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--black); }
+  .skills-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .skill-group {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .skill-group:hover { border-color: rgba(232,93,38,0.5); transform: translateY(-4px); }
+  .skill-group::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+  }
+  .skill-group:hover::before { transform: scaleX(1); }
+  .sg-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: rgba(232,93,38,0.08);
+    line-height: 1;
+    position: absolute;
+    top: 0.5rem; right: 1rem;
+  }
+  .sg-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 1.5rem;
+  }
+  .skill-items { display: flex; flex-direction: column; gap: 0.75rem; }
+  .skill-item { }
+  .skill-name-row {
+    display: flex; justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+  .skill-name {
+    font-size: 0.85rem;
+    color: var(--off-white);
+  }
+  .skill-pct {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--grey);
+  }
+  .skill-bar {
+    height: 2px;
+    background: rgba(240,236,227,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    background: var(--orange);
+    transform-origin: left;
+    animation: bar-grow 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
+    transform: scaleX(0);
+  }
+  @keyframes bar-grow {
+    to { transform: scaleX(1); }
+  }
+
+  .soft-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .soft-tag {
+    background: rgba(232,93,38,0.06);
+    border: 1px solid rgba(232,93,38,0.2);
+    padding: 0.5rem 0.85rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    text-align: center;
+  }
+
+  /* PROJECTS */
+  #projects { background: #0b0b0b; }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .project-card:hover { border-color: var(--orange); }
+  .project-card:hover .project-img-overlay { opacity: 0.3; }
+  .project-img-bg {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-p1-bg {
+    background:
+      linear-gradient(135deg, #1a2a3a 0%, #0d1a2a 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .project-p2-bg {
+    background:
+      linear-gradient(135deg, #2a1a0e 0%, #1a0e08 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .project-icon-large {
+    font-size: 5rem;
+    opacity: 0.25;
+  }
+  .project-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, var(--card-bg));
+    transition: opacity 0.3s;
+  }
+  .project-number {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--orange);
+    background: rgba(10,10,10,0.7);
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 0.05em;
+  }
+  .project-body { padding: 2rem; }
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .project-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    border: 1px solid rgba(232,93,38,0.3);
+    padding: 0.2rem 0.6rem;
+  }
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--off-white);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--grey);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .project-focus {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+  .pf-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 0.5rem;
+  }
+  .pf-items {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .pf-item {
+    background: rgba(240,236,227,0.04);
+    font-size: 0.78rem;
+    color: var(--light-grey);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--border);
+  }
+
+  /* CONTACT */
+  #contact { background: var(--black); }
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .contact-left .big-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    color: var(--off-white);
+    margin-bottom: 1.5rem;
+  }
+  .contact-left .big-text span { color: var(--orange); }
+  .contact-left p {
+    font-size: 0.95rem;
+    color: var(--grey);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .ci-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    transition: border-color 0.25s;
+  }
+  .ci-row:hover { border-color: rgba(232,93,38,0.4); }
+  .ci-icon {
+    width: 36px; height: 36px;
+    background: rgba(232,93,38,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .ci-content { }
+  .ci-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+  .ci-val {
+    font-size: 0.88rem;
+    color: var(--off-white);
+  }
+
+  .contact-form { }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 0.5rem;
+  }
+  .form-input, .form-textarea {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--off-white);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.25s;
+    resize: none;
+  }
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--orange);
+  }
+  .form-input::placeholder, .form-textarea::placeholder {
+    color: var(--grey);
+    font-size: 0.85rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #070707;
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--grey);
+  }
+  .footer-links {
+    display: flex; gap: 2rem;
+  }
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .footer-links a:hover { color: var(--orange); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    #home { grid-template-columns: 1fr; padding: 2rem; padding-top: 100px; }
+    .hero-right { display: none; }
+    section { padding: 5rem 2rem; }
+    .about-grid, .contact-layout, .skills-layout { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">A<span>.</span>S<span>.</span>T</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-diagonal"></div>
+  <div class="hero-left">
+    <div class="hero-tag">B.Tech Engineering · LPU</div>
+    <h1 class="hero-name">
+      Abhiroop<br>Shanker<br><span class="accent">Tewari</span>
+    </h1>
+    <p class="hero-subtitle">Bridging Traditional Mechanics<br>& Smart Technologies</p>
+    <p class="hero-desc">
+      A detail-oriented engineering student with hands-on expertise in CAD design, industrial automation, and renewable energy systems — building solutions that matter.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="avatar-ring">
+            <div class="avatar-initials">AST</div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-box">
+              <span class="stat-num">2+</span>
+              <span class="stat-label">Major Projects</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">5+</span>
+              <span class="stat-label">Tools Mastered</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">20%</span>
+              <span class="stat-label">Flight Efficiency ↑</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-num">3</span>
+              <span class="stat-label">Languages</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <span class="scroll-line"></span>
+    Scroll to Explore
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 / About</div>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="section-divider"></div>
+  <div class="about-grid">
+    <div class="about-left fade-up">
+      <div class="about-objective">
+        "A dedicated and detail-oriented B.Tech student with a strong foundation in core engineering principles and hands-on experience in CAD design and automation."
+      </div>
+      <div class="about-meta">
+        <div class="meta-row">
+          <span class="meta-key">Name</span>
+          <span class="meta-val">Abhiroop Shanker Tewari</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Degree</span>
+          <span class="meta-val">B.Tech — Core Engineering</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">University</span>
+          <span class="meta-val">Lovely Professional University (LPU)</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Focus</span>
+          <span class="meta-val">CAD/CAM · Automation · Renewable Energy</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Status</span>
+          <span class="meta-val" style="color:var(--orange);">● Open to Opportunities</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-right fade-up">
+      <p class="about-body">
+        I'm an engineering student at <strong>Lovely Professional University</strong> with a passion for designing solutions that sit at the intersection of <strong>mechanical precision</strong> and <strong>modern intelligent systems</strong>. My work spans aerodynamic modeling, structural simulation, industrial automation, and embedded control systems.
+      </p>
+      <p class="about-body">
+        Whether it's engineering the frame of a <strong>solar-powered drone</strong> or programming a <strong>PLC-driven conveyor</strong> to autonomously detect defects, I approach every challenge with analytical rigor and a drive to build things that work — not just look good on paper.
+      </p>
+      <p class="about-body">
+        My goal is to join a <strong>forward-thinking engineering firm</strong> where I can contribute from day one, grow alongside experienced teams, and help shape the next generation of smart, sustainable engineering systems.
+      </p>
+      <div class="highlight-boxes">
+        <div class="highlight-box">
+          <div class="hb-icon">🛩️</div>
+          <div class="hb-title">Aerospace Design</div>
+          <div class="hb-desc">SolidWorks CAD, ANSYS stress simulation, aerodynamic optimization.</div>
+        </div>
+        <div class="highlight-box">
+          <div class="hb-icon">⚙️</div>
+          <div class="hb-title">Industrial Automation</div>
+          <div class="hb-desc">PLC programming, mechatronic systems, and sensor integration.</div>
+        </div>
+        <div class="highlight-box">
+          <div class="hb-icon">♻️</div>
+          <div class="hb-title">Renewable Integration</div>
+          <div class="hb-desc">Solar energy systems applied to real engineering prototypes.</div>
+        </div>
+        <div class="highlight-box">
+          <div class="hb-icon">💻</div>
+          <div class="hb-title">Technical Programming</div>
+          <div class="hb-desc">C, C++, Python, and MATLAB for engineering computation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 / Skills</div>
+  <h2 class="section-title">Technical Arsenal</h2>
+  <div class="section-divider"></div>
+  <div class="skills-layout">
+    <!-- Engineering Tools -->
+    <div class="skill-group fade-up">
+      <span class="sg-num">01</span>
+      <div class="sg-title">Engineering Tools</div>
+      <div class="skill-items">
+        <div class="skill-item">
+          <div class="skill-name-row">
+            <span class="skill-name">SolidWorks</span>
+            <span class="skill-pct">90%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row">
+            <span class="skill-name">AutoCAD</span>
+            <span class="skill-pct">85%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:85%;animation-delay:0.1s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row">
+            <span class="skill-name">ANSYS</span>
+            <span class="skill-pct">80%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:80%;animation-delay:0.2s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row">
+            <span class="skill-name">MATLAB</span>
+            <span class="skill-pct">78%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:78%;animation-delay:0.3s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row">
+            <span class="skill-name">PLC Programming</span>
+            <span class="skill-pct">82%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:82%;animation-delay:0.4s"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Programming -->
+    <div class="skill-group fade-up" style="animation-delay:0.15s">
+      <span class="sg-num">02</span>
+      <div class="sg-title">Programming Languages</div>
+      <div class="skill-items">
+        <div class="skill-item">
+          <div class="skill-name-row">
+            <span class="skill-name">C</span>
+            <span class="skill-pct">85%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row">
+            <span class="skill-name">C++</span>
+            <span class="skill-pct">82%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:82%;animation-delay:0.1s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row">
+            <span class="skill-name">Python</span>
+            <span class="skill-pct">80%</span>
+          </div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:80%;animation-delay:0.2s"></div></div>
+        </div>
+      </div>
+      <div style="margin-top:2rem">
+        <div class="sg-title" style="margin-bottom:1rem">Soft Skills</div>
+        <div class="soft-skills-grid">
+          <div class="soft-tag">Project Management</div>
+          <div class="soft-tag">Cross-functional Collab</div>
+          <div class="soft-tag">Analytical Thinking</div>
+          <div class="soft-tag">Technical Documentation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domains -->
+    <div class="skill-group fade-up" style="animation-delay:0.3s">
+      <span class="sg-num">03</span>
+      <div class="sg-title">Engineering Domains</div>
+      <div class="skill-items">
+        <div class="skill-item">
+          <div class="skill-name-row"><span class="skill-name">CAD/CAM Design</span><span class="skill-pct">90%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row"><span class="skill-name">Fluid Dynamics</span><span class="skill-pct">75%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:75%;animation-delay:0.1s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row"><span class="skill-name">Mechatronics</span><span class="skill-pct">80%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:80%;animation-delay:0.2s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row"><span class="skill-name">Renewable Energy Systems</span><span class="skill-pct">76%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:76%;animation-delay:0.3s"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name-row"><span class="skill-name">Logic & Control Design</span><span class="skill-pct">83%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:83%;animation-delay:0.4s"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">03 / Projects</div>
+  <h2 class="section-title">Key Work</h2>
+  <div class="section-divider"></div>
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="project-card fade-up">
+      <div class="project-img-bg project-p1-bg">
+        <div class="project-icon-large">🛩️</div>
+        <div class="project-img-overlay"></div>
+        <div class="project-number">P-01</div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">CAD/CAM</span>
+          <span class="project-tag">Fluid Dynamics</span>
+          <span class="project-tag">Renewable Energy</span>
+        </div>
+        <h3 class="project-title">Design & Fabrication of a Solar-Powered Drone</h3>
+        <p class="project-desc">
+          Engineered an aerodynamic frame using <strong style="color:var(--off-white)">SolidWorks</strong> and conducted comprehensive stress simulations in <strong style="color:var(--off-white)">ANSYS</strong>. Integrated lightweight solar panels into the structural design, extending flight time by <strong style="color:var(--orange)">20%</strong> compared to standard battery-only models — demonstrating a viable path to self-sustaining UAV systems.
+        </p>
+        <div class="project-focus">
+          <div class="pf-label">Technical Focus Areas</div>
+          <div class="pf-items">
+            <span class="pf-item">Aerodynamic Frame Design</span>
+            <span class="pf-item">FEA Stress Simulation</span>
+            <span class="pf-item">Solar Integration</span>
+            <span class="pf-item">Weight Optimization</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card fade-up" style="animation-delay:0.2s">
+      <div class="project-img-bg project-p2-bg">
+        <div class="project-icon-large">⚙️</div>
+        <div class="project-img-overlay"></div>
+        <div class="project-number">P-02</div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Industrial Automation</span>
+          <span class="project-tag">Mechatronics</span>
+          <span class="project-tag">Logic Design</span>
+        </div>
+        <h3 class="project-title">Automated Quality Control Conveyor System</h3>
+        <p class="project-desc">
+          Developed a functional prototype of an automated conveyor using <strong style="color:var(--off-white)">PLC programming</strong> and microcontroller-based sensors. The system autonomously detects and sorts defective components on a simulated assembly line — illustrating core principles of <strong style="color:var(--orange)">Industry 4.0</strong> and smart manufacturing logic.
+        </p>
+        <div class="project-focus">
+          <div class="pf-label">Technical Focus Areas</div>
+          <div class="pf-items">
+            <span class="pf-item">PLC Logic Programming</span>
+            <span class="pf-item">Sensor Integration</span>
+            <span class="pf-item">Defect Detection</span>
+            <span class="pf-item">Assembly Line Simulation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">04 / Contact</div>
+  <h2 class="section-title">Let's Connect</h2>
+  <div class="section-divider"></div>
+  <div class="contact-layout">
+    <div class="contact-left fade-up">
+      <div class="big-text">
+        Ready to build<br>something <span>great</span><br>together?
+      </div>
+      <p>I'm actively seeking internships and full-time engineering roles where I can apply my skills in CAD, automation, and systems design. If my profile resonates with your team's needs, let's talk.</p>
+      <div class="contact-info">
+        <div class="ci-row">
+          <div class="ci-icon">📧</div>
+          <div class="ci-content">
+            <div class="ci-key">Email</div>
+            <div class="ci-val">abhiroop.tewari@example.com</div>
+          </div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon">🎓</div>
+          <div class="ci-content">
+            <div class="ci-key">University</div>
+            <div class="ci-val">Lovely Professional University, Punjab</div>
+          </div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon">💼</div>
+          <div class="ci-content">
+            <div class="ci-key">LinkedIn</div>
+            <div class="ci-val">linkedin.com/in/abhiroop-tewari</div>
+          </div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon">📍</div>
+          <div class="ci-content">
+            <div class="ci-key">Location</div>
+            <div class="ci-val">India · Open to Relocation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form fade-up" style="animation-delay:0.2s">
+      <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <input class="form-input" type="text" placeholder="John Smith">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="john@company.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Organisation / Company</label>
+        <input class="form-input" type="text" placeholder="Engineering Firm Pvt. Ltd.">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" rows="5" placeholder="Tell me about the opportunity or project..."></textarea>
+      </div>
+      <a href="#" class="btn-primary" style="display:block;text-align:center;padding:1rem">Send Message →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 Abhiroop Shanker Tewari · B.Tech Core Engineering · LPU</div>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Custom Cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  document.querySelectorAll('a, button, .skill-group, .project-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px'; cursor.style.height = '20px';
+      cursor.style.background = 'var(--orange-light)';
+      cursorRing.style.width = '52px'; cursorRing.style.height = '52px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px'; cursor.style.height = '12px';
+      cursor.style.background = 'var(--orange)';
+      cursorRing.style.width = '36px'; cursorRing.style.height = '36px';
+    });
+  });
+
+  // Scroll reveal
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Smooth nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--orange)' : '';
+    });
+  });
+</script>
+</body>
+</html>
